@@ -1,0 +1,12 @@
+version: '3'
+services:
+  bluek9-client:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - BLUEK9_USERNAME=bluek9
+      - BLUEK9_PASSWORD=warhammer
+      - BLUEK9_SECRET=use-a-strong-secret
+    volumes:
+      - ./data:/app/data

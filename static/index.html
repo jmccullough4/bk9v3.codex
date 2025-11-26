@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlueK9 Operator Console</title>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <div>
+        <h1>BlueK9 Client</h1>
+        <p class="muted">Bluetooth ISR console — secure & mission ready</p>
+      </div>
+      <div class="actions">
+        <button id="toggle-follow" class="btn">Toggle Follow GPS</button>
+        <button id="clear" class="btn">Clear Results</button>
+        <button id="logout" class="btn btn-danger">Logout</button>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="map-panel">
+        <div class="controls">
+          <label>Map style:</label>
+          <select id="style-picker" class="input">
+            <option value="mapbox://styles/mapbox/dark-v11">Dark</option>
+            <option value="mapbox://styles/mapbox/streets-v12">Streets</option>
+            <option value="mapbox://styles/mapbox/satellite-streets-v12">Satellite</option>
+          </select>
+          <label><input type="checkbox" id="toggle-cep" checked /> CEP overlay</label>
+        </div>
+        <div id="map"></div>
+      </div>
+      <div class="side-panel">
+        <div class="card">
+          <h3>Mission Log</h3>
+          <div id="log" class="log"></div>
+        </div>
+        <div class="card">
+          <h3>Targets</h3>
+          <form id="target-form">
+            <input class="input" name="bd_address" placeholder="BD Address" required />
+            <input class="input" name="name" placeholder="Device Name" />
+            <input class="input" name="manufacturer" placeholder="Manufacturer" />
+            <button class="btn" type="submit">Add Target</button>
+          </form>
+          <ul id="targets" class="list"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Bluetooth Survey</h3>
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>BD Address</th>
+              <th>Device Name</th>
+              <th>Manufacturer</th>
+              <th>Type</th>
+              <th>RSSI</th>
+              <th>Emitter Location</th>
+              <th>System Location</th>
+              <th>First Seen</th>
+              <th>Last Seen</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+  <audio id="alert-sound" src="/assets/alert.wav" preload="auto"></audio>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+  <script src="/assets/main.js"></script>
+</body>
+</html>
