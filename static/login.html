@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BlueK9 Login</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body class="login-body">
+  <div class="login-card">
+    <h1>BlueK9 Access</h1>
+    <p class="muted">Authenticate to continue</p>
+    <form id="login-form">
+      <input class="input" name="username" placeholder="Username" required />
+      <input class="input" name="password" type="password" placeholder="Password" required />
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <div id="login-error" class="error"></div>
+  </div>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const payload = Object.fromEntries(form.entries());
+      const res = await fetch('/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.ok) {
+        window.location = '/';
+      } else {
+        document.getElementById('login-error').textContent = data.error || 'Login failed';
+      }
+    });
+  </script>
+</body>
+</html>
