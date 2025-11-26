@@ -206,6 +206,11 @@ function trackGps() {
       if (map.getSource('system')) {
         map.getSource('system').setData(geojsonPoint(coords, pos.coords.accuracy));
       }
+      fetch('/api/location', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ lat: pos.coords.latitude, lng: pos.coords.longitude, accuracy: pos.coords.accuracy }),
+      }).catch((err) => console.warn('Failed to push location', err));
     },
     (err) => console.warn(err),
     { enableHighAccuracy: true }
